@@ -1,0 +1,50 @@
+.spacer {
+    margin: 0 16px;
+    flex: 1;
+}
+
+.route-link {
+    margin-right: 10px;
+    padding: 8px 16px;
+    padding: 8px clamp(5px, 0.7vw, 16px);
+    border-radius: 5px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.route-link.active,
+.route-link:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #1976d2;
+    color: white;
+    font-weight: 600;
+
+    img {
+        margin: 0 16px;
+    }
+
+    #twitter-logo {
+        height: 40px;
+        margin: 0 8px;
+    }
+
+    #youtube-logo {
+        height: 40px;
+        margin: 0 16px;
+    }
+
+    #twitter-logo:hover,
+    #youtube-logo:hover {
+        opacity: 0.8;
+    }
+}

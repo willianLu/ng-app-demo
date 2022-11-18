@@ -1,0 +1,82 @@
+<h2>Products</h2>
+<div
+  *ngFor="
+    let product of products;
+    let isEven = even;
+    let isOdd = odd;
+    let isFirst = first;
+    let isLast = last
+  "
+  #list
+  [class.p-even]="isEven"
+  [class.p-odd]="isOdd"
+  [class.p-first]="isFirst"
+  [class.p-last]="isLast"
+>
+  <h3>
+    <a [title]="product.name + ' details'">
+      {{ product.name }}
+    </a>
+  </h3>
+  <p *ngIf="product.description">Description: {{ product.description }}</p>
+</div>
+<div>与子组件显示保持一致：<span [hidden]="isShow">这是要隐藏的内容</span></div>
+<app-child [is-show]="isShow" (toggle)="onToggle($event)">
+  <ng-container>插入部分内容</ng-container>
+  <ng-container class="header">我是头部</ng-container>
+  <ng-container class="footer">我是底部</ng-container>
+</app-child>
+<div>
+  <div class="flex">
+    <p class="s-list" [ngClass]="switch.first">第一个</p>
+    <p class="s-list" [ngClass]="switch.second">第二个</p>
+  </div>
+  <div>
+    <button (click)="onSwitchClass()">切换</button>
+  </div>
+</div>
+<div>
+  <div *ngIf="courseData.length > 0; then dataList; else noData"></div>
+  <ng-template #dataList>
+    <div>课程列表</div>
+    <div *ngFor="let item of courseData">第{{ item }}单元</div>
+  </ng-template>
+  <ng-template #noData>没有更多数据</ng-template>
+  <div>
+    <button (click)="exchangeCourseData()">更改课程数据</button>
+  </div>
+</div>
+<div [appHover]="{ bgColor: '#f1f1f1' }">自定义指令测试</div>
+<div [vCopy]>这是要拷贝的内容</div>
+<div>{{ "这是一个自定义pipe 省略内容" | summary: 11 }}</div>
+<div>当前日期：{{ currentDate | date: "YYYY-MM-dd HH:mm:ss" }}</div>
+<div>价格：{{ price | currency }}</div>
+<div>价格：{{ price | currency: "CNY":"symbol-narrow" }}</div>
+<form #f="ngForm" (submit)="onSubmit(f)">
+  <label class="form-list" for="username">
+    <span>姓名：</span>
+    <input
+      ngModel="123"
+      #username1="ngModel"
+      type="text"
+      id="username"
+      name="username"
+      required
+      minlength="2"
+      pattern="\d+"
+    />
+    <div *ngIf="username1.touched && !username1.valid && username1.errors">
+      <div *ngIf="username1.errors.required">请填写用户名</div>
+      <div *ngIf="username1.errors.pattern">不符合正则规则</div>
+    </div>
+  </label>
+  <label class="form-list" for="sex" ngModelGroup="user">
+    <span>性别：</span>
+    <select id="sex" name="sex" ngModel="1" required>
+      <option value="1">男</option>
+      <option value="2">女</option>
+    </select>
+  </label>
+
+  <button [disabled]="f.invalid">提交</button>
+</form>

@@ -1,0 +1,17 @@
+<h4>我是子组件</h4>
+<div>
+  后面内容隐藏：<span [hidden]="isShow">这是要隐藏的内容</span
+  ><button (click)="onClickToggle()">切换隐藏</button>
+</div>
+<section>
+  <div>子组件内容插槽</div>
+  <div class="slot-content">
+    <ng-content></ng-content>
+  </div>
+  <div>具名插槽</div>
+  <div class="slot-content">
+    <ng-content select=".header"></ng-content>
+    <div class="slot-middle"></div>
+    <ng-content select=".footer"></ng-content>
+  </div>
+</section>
